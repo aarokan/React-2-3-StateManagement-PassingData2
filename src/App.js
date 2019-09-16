@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Dashboard from './Dashboard';
 
 /*
 Display a list of movies where each movie contains a list of users that favorited it.
@@ -101,6 +102,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.usersByMovie = {};
+    
+    profiles.forEach(profile => {
+      const movieID = profile.favoriteMovieID;
+      
+      if (this.usersByMovie[movieID]) {
+        this.usersByMovie[movieID].push(profile.userID);
+      } else {
+        this.usersByMovie[movieID] = [profile.favoriteMovieID];
+      }
+    })
   }
   
   render() {
